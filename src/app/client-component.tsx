@@ -26,7 +26,7 @@ export function ClientComponent({promise}: {promise: Promise<number>}) {
   return (
     <div className="bg-black/[.05] dark:bg-white/[.06] p-4 rounded text-sm">
       {data === null ? "Loading..." : `Random number: ${data}`}
-      <button onClick={actionHandler} className="block mt-4 p-2 bg-black/[.1] dark:bg-white/[.1] rounded text-white dark:text-black" />
+      <button onClick={actionHandler} className="block mt-4 p-2 bg-black/[.1] dark:bg-white/[.1] rounded text-white dark:text-black"> Click To Set Cookies</button>
     </div>
   );
 }

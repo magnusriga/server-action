@@ -11,7 +11,6 @@ function wait(ms: number) {
 }
 
 export default async function Home() {
-
   const promise = wait(3000);
   console.log('headers in component body', new Map(headers()));
 
@@ -36,7 +35,6 @@ export default async function Home() {
           <li>Save and see your changes instantly.</li>
         </ol>
         <ClientComponent promise={promise}/>
-
       </main>
     </div>
   );
