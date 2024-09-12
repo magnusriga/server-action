@@ -1,20 +1,11 @@
 import Image from "next/image";
-import { ClientComponent } from "./client-component";
-import { headers } from "next/headers";
 
 function wait(ms: number) {
-  return new Promise<number>((resolve) => setTimeout(() => {
-    const _headers = new Map(headers());
-    resolve(Math.floor(Math.random() * 100));
-    console.log('headers in promise after resolve', _headers);
-  }, ms))
+  return new Promise((resolve) => setTimeout(() => resolve(Math.random()), ms));
 }
 
 export default async function Home() {
-
   const promise = wait(3000);
-  console.log('headers in component body', new Map(headers()));
-
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -35,7 +26,7 @@ export default async function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-        <ClientComponent promise={promise}/>
+        <ClientComponent />
 
       </main>
     </div>

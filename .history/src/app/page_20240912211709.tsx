@@ -1,19 +1,23 @@
 import Image from "next/image";
 import { ClientComponent } from "./client-component";
 import { headers } from "next/headers";
+import { setCookiesAction } from "@/action";
+
+
+async function callback(num: number, resolve: (value: number) => void) {
+  const saReturn = await setCookiesAction(num)
+  console.log((saReturn === num) ? 'success' : 'failure')
+  resolve(num);
+}
 
 function wait(ms: number) {
-  return new Promise<number>((resolve) => setTimeout(() => {
-    const _headers = new Map(headers());
-    resolve(Math.floor(Math.random() * 100));
-    console.log('headers in promise after resolve', _headers);
-  }, ms))
+  return new Promise<number>((resolve) => setTimeout(() => callback(Math.random(), resolve), ms));
 }
 
 export default async function Home() {
-
   const promise = wait(3000);
-  console.log('headers in component body', new Map(headers()));
+
+  console.log('headers', new Map(headers()));
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
