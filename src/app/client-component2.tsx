@@ -5,22 +5,19 @@ import { useEffect, useState } from "react";
 import { setCookiesAction } from "@/action";
 import { useRouter } from "next/navigation";
 
-export function ClientComponent({promise}: {promise: Promise<number>}) {
+export function ClientComponent2({value}: {value: number}) {
   const router = useRouter();
   const [data, setData] = useState<number | null>(null);
 
   useEffect(() => {
-    console.log('in useEffect, promise is', promise)
-    promise.then((data) => {
-      console.log('promise resolved inside useEffect, setting data state next, data is:', data)
-      setData(data)
-    })
-  }, [promise]);
+    console.log('in useEffect, value is', value)
+  }, [value]);
 
   async function actionHandler() {
     console.log('before running SA')
     const saReturn = await setCookiesAction(data ?? 0)
     console.log('after SA, return value was', saReturn)
+    console.log((saReturn === data) ? 'saReturn === data' : 'saReturn !== data')
     setData(saReturn)
     // router.refresh()
   }
